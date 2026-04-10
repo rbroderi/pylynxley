@@ -7,7 +7,6 @@ the public `Lnk` API, convenience constructors, and hotkey formatting helpers.
 
 import datetime as dt
 import ntpath
-import sys
 from dataclasses import dataclass
 from dataclasses import field
 from datetime import datetime
@@ -17,9 +16,6 @@ from pathlib import Path
 from typing import Any
 from typing import Self
 from typing import cast
-
-if __name__ == "__main__" and (__package__ is None or __package__ == ""):  # pragma: no cover
-    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from pylynxley.core import HOTKEY_ALPHA_END
 from pylynxley.core import HOTKEY_ALPHA_START
