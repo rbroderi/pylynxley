@@ -1,32 +1,24 @@
----
 name: Quality and Security
-
 "on":
   pull_request:
   push:
     branches: [main]
   workflow_dispatch:
-
 jobs:
   quality-security:
     name: Quality and security checks
     runs-on: ubuntu-latest
     timeout-minutes: 20
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.14"
-
       - name: Set up uv
         uses: astral-sh/setup-uv@v5
-
       - name: Install project with dev dependencies
         run: uv sync --extra dev
-
       - name: Run quality and security hooks
         run: uv run prek run vulture deptry detect-secrets --all-files
