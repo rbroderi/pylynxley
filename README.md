@@ -8,7 +8,7 @@
 Tooling:
 [![Ruff](https://img.shields.io/badge/ruff-enabled-46a758)](.pre-commit-config.yaml)
 [![Basedpyright](https://img.shields.io/badge/basedpyright-enabled-2f6feb)](.pre-commit-config.yaml)
-[![Ty](https://img.shields.io/badge/ty-check-enabled-7a52cc)](.pre-commit-config.yaml)
+[![Ty](https://img.shields.io/badge/ty%20check-enabled-7a52cc)](.pre-commit-config.yaml)
 [![Pytest Coverage](https://img.shields.io/badge/pytest-100%25%20coverage-brightgreen)](.pre-commit-config.yaml)
 
 Quality and Security:
