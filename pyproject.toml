@@ -1,0 +1,53 @@
+[project]
+name = "pylynxley"
+version = "2026.04.10.01"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "rbroderi", email = "richard.broderick@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "beartype>=0.22.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.3",
+    "pytest-cov>=7.1.0",
+    "pytest-sugar>=1.1.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.basedpyright]
+venvPath = "."
+venv = ".venv"
+include = ["src", "src\\pylynxley\\tests"]
+pythonVersion = "3.14"
+reportUnusedCallResult = "none"
+reportAny = "none"
+reportExplicitAny = "none"
+reportImplicitStringConcatenation = "none"
+reportUnusedFunction = "none"
+reportMissingParameterType = "none"
+reportUnknownParameterType = "none"
+reportUnknownVariableType = "none"
+reportUnknownArgumentType = "none"
+reportUnknownMemberType = "none"
+
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.coverage.run]
+omit = ["src/fanic/main.py", "src/pylynxley/tests/*"]
+
+[tool.ty.src]
+exclude = ["typings"]
