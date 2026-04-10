@@ -40,7 +40,7 @@ class TypedPropertyValue:
     raw: bytes
 
     @classmethod
-    def read(cls, br: BinReader) -> "TypedPropertyValue":
+    def read(cls, br: BinReader) -> TypedPropertyValue:
         vt = br.read_u16()
         _pad = br.read_u16()
         if vt == VT_LPWSTR:
@@ -78,7 +78,7 @@ class PropertyStore:
     properties: list[tuple[str | int, TypedPropertyValue]] = field(default_factory=list)
 
     @classmethod
-    def read(cls, br: BinReader) -> "PropertyStore | None":
+    def read(cls, br: BinReader) -> PropertyStore | None:
         size = br.read_u32()
         if size == 0:
             return None
@@ -145,14 +145,6 @@ class PropertyStore:
         return out.getvalue()
 
 
-@runtime_checkable
-class ExtraBlockFactory(Protocol):
-    signature: ExtraDataType
-
-    @classmethod
-    def from_bytes(cls, payload: bytes) -> "ExtraDataBlock": ...
-
-
 @dataclass
 class ExtraDataBlock(ABC):
     """Abstract base for known ExtraData blocks.
@@ -163,12 +155,20 @@ class ExtraDataBlock(ABC):
 
     @classmethod
     @abstractmethod
-    def from_bytes(cls, payload: bytes) -> "ExtraDataBlock":
+    def from_bytes(cls, payload: bytes) -> ExtraDataBlock:
         """Parse an ExtraData block of this type from bytes."""
 
     @abstractmethod
     def to_bytes(self) -> bytes:
         """Serialize this ExtraData block to bytes."""
+
+
+@runtime_checkable
+class ExtraBlockFactory(Protocol):
+    signature: ExtraDataType
+
+    @classmethod
+    def from_bytes(cls, payload: bytes) -> ExtraDataBlock: ...
 
 
 @dataclass
@@ -197,7 +197,7 @@ class IconEnvironmentDataBlock(ExtraDataBlock):
 
     @classmethod
     @override
-    def from_bytes(cls, payload: bytes) -> "IconEnvironmentDataBlock":
+    def from_bytes(cls, payload: bytes) -> IconEnvironmentDataBlock:
         br = BinReader(BytesIO(payload))
         ansi = decode_ansi(br.read_bytes(ICON_ENV_ANSI_SIZE)).replace("\x00", "")
         uni = br.read_bytes(ICON_ENV_UNICODE_SIZE).decode("utf-16-le", errors="replace").replace("\x00", "")
@@ -223,7 +223,7 @@ class EnvironmentVariableDataBlock(ExtraDataBlock):
 
     @classmethod
     @override
-    def from_bytes(cls, payload: bytes) -> "EnvironmentVariableDataBlock":
+    def from_bytes(cls, payload: bytes) -> EnvironmentVariableDataBlock:
         br = BinReader(BytesIO(payload))
         ansi = decode_ansi(br.read_bytes(ENVVAR_ANSI_SIZE)).replace("\x00", "")
         uni = br.read_bytes(ENVVAR_UNICODE_SIZE).decode("utf-16-le", errors="replace").replace("\x00", "")
@@ -248,7 +248,7 @@ class PropertyStoreDataBlock(ExtraDataBlock):
 
     @classmethod
     @override
-    def from_bytes(cls, payload: bytes) -> "PropertyStoreDataBlock":
+    def from_bytes(cls, payload: bytes) -> PropertyStoreDataBlock:
         br = BinReader(BytesIO(payload))
         stores: list[PropertyStore] = []
         while True:
@@ -286,7 +286,7 @@ class ExtraData:
     }
 
     @classmethod
-    def read(cls, br: BinReader) -> "ExtraData":
+    def read(cls, br: BinReader) -> ExtraData:
         blocks: list[ExtraBlock] = []
         while True:
             size = br.read_u32()

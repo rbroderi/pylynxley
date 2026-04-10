@@ -3,6 +3,25 @@
 ![Python](https://img.shields.io/badge/python-3.14%2B-blue)
 ![Platform](https://img.shields.io/badge/platform-Windows-informational)
 ![License](https://img.shields.io/badge/license-LGPLv3-blue)
+![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+
+Tooling:
+[![Ruff](https://img.shields.io/badge/ruff-enabled-46a758)](.pre-commit-config.yaml)
+[![Basedpyright](https://img.shields.io/badge/basedpyright-enabled-2f6feb)](.pre-commit-config.yaml)
+[![Ty](https://img.shields.io/badge/ty-check-enabled-7a52cc)](.pre-commit-config.yaml)
+[![Pytest Coverage](https://img.shields.io/badge/pytest-100%25%20coverage-brightgreen)](.pre-commit-config.yaml)
+
+Quality and Security:
+[![Vulture](https://img.shields.io/badge/vulture-enabled-5f6368)](.pre-commit-config.yaml)
+[![Deptry](https://img.shields.io/badge/deptry-enabled-5f6368)](.pre-commit-config.yaml)
+[![Detect Secrets](https://img.shields.io/badge/detect--secrets-enabled-5f6368)](.pre-commit-config.yaml)
+
+Content and Config:
+[![Yamllint](https://img.shields.io/badge/yamllint-enabled-5f6368)](.pre-commit-config.yaml)
+[![Yamlfmt](https://img.shields.io/badge/yamlfmt-enabled-5f6368)](.pre-commit-config.yaml)
+[![Markdownlint](https://img.shields.io/badge/markdownlint-enabled-5f6368)](.pre-commit-config.yaml)
+[![mdformat](https://img.shields.io/badge/mdformat-enabled-5f6368)](.pre-commit-config.yaml)
+[![Taplo](https://img.shields.io/badge/taplo-enabled-5f6368)](.pre-commit-config.yaml)
 
 Python library for reading and writing Windows shortcut files (.lnk).
 
@@ -101,9 +120,13 @@ python -m pylynxley.lnk create-uwp PACKAGE_FAMILY TARGET OUT_FILE \
 
 ```sh
 python -m pylynxley.lnk parse src/pylynxley/tests/examples/local_file.lnk
-python -m pylynxley.lnk create-local C:\Windows\explorer.exe explorer.lnk --window max
-python -m pylynxley.lnk create-remote \\192.168.1.1\share\file.doc share-doc.lnk
-python -m pylynxley.lnk create-uwp Microsoft.WindowsCalculator_8wekyb3d8bbwe Microsoft.WindowsCalculator_8wekyb3d8bbwe!App calc.lnk
+python -m pylynxley.lnk create-local C:\Windows\explorer.exe \
+  explorer.lnk --window max
+python -m pylynxley.lnk create-remote \
+  \\192.168.1.1\share\file.doc share-doc.lnk
+python -m pylynxley.lnk create-uwp \
+  Microsoft.WindowsCalculator_8wekyb3d8bbwe \
+  Microsoft.WindowsCalculator_8wekyb3d8bbwe!App calc.lnk
 ```
 
 ## Python API

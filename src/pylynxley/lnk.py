@@ -119,7 +119,7 @@ class Lnk:
 
     # --- Factory & IO ---
     @classmethod
-    def from_file(cls, path: Path) -> "Lnk":
+    def from_file(cls, path: Path) -> Lnk:
         with path.open("rb") as fp:
             lnk = cls.read(fp)
         lnk.source_path = path
@@ -214,7 +214,7 @@ class Lnk:
         self.link_info.write(bw, include_unicode=True)
 
     @classmethod
-    def read(cls, fp: BufferedIOBase) -> "Lnk":
+    def read(cls, fp: BufferedIOBase) -> Lnk:
         br = BinReader(fp)
         (
             flags,
@@ -299,7 +299,7 @@ class Lnk:
         icon: str | None = None,
         working_dir: str | None = None,
         window: ShowCommand = ShowCommand.NORMAL,
-    ) -> "Lnk":
+    ) -> Lnk:
         now = datetime.now(dt.UTC)
         flags = LinkFlags.HasLinkTargetIDList | LinkFlags.HasLinkInfo | LinkFlags.IsUnicode
         if description:
@@ -354,7 +354,7 @@ class Lnk:
         args: str | None = None,
         icon: str | None = None,
         window: ShowCommand = ShowCommand.NORMAL,
-    ) -> "Lnk":
+    ) -> Lnk:
         """Create a remote (UNC) shortcut with environment block for path expansion."""
         now = datetime.now(tz=dt.UTC)
         flags = LinkFlags.HasLinkInfo | LinkFlags.IsUnicode | LinkFlags.HasExpString
@@ -403,7 +403,7 @@ class Lnk:
         location: str | None = None,
         logo44x44: str | None = None,
         description: str | None = None,
-    ) -> "Lnk":
+    ) -> Lnk:
         """Create a UWP app shortcut using APPS segment and RootEntry UWP GUID."""
         blocks = [
             UwpMainBlock(

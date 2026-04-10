@@ -6,7 +6,7 @@ _default:
     @just --list
 
 ruff:
-    uvx ruff check --exclude typings 
+    uvx ruff check --exclude typings
     uvx ruff format --exclude typings
 
 # Run Python type checking with basedpyright.

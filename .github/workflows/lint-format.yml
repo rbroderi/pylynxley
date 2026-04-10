@@ -1,0 +1,40 @@
+---
+name: Lint and Format
+
+"on":
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint-format:
+    name: Lint and format checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install project with dev dependencies
+        run: uv sync --extra dev
+
+      - name: Run lint and format hooks
+        run: |
+          uv run prek run ssort --all-files
+          uv run prek run fix-byte-order-marker check-merge-conflict end-of-file-fixer trailing-whitespace mixed-line-ending --all-files
+          uv run prek run check-yaml check-toml check-added-large-files check-executables-have-shebangs check-shebang-scripts-are-executable --all-files
+          uv run prek run yamlfmt yamllint --all-files
+          uv run prek run typos mdformat markdownlint-cli2 --all-files
+          uv run prek run taplo-format taplo-lint --all-files
+          uv run prek run pyupgrade pycln autopep695-format --all-files
+          uv run prek run ruff-check ruff-format ruff-check-post-format refurb --all-files

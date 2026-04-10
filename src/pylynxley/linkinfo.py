@@ -92,7 +92,7 @@ class LinkInfo:
     @classmethod
     def _populate_local_fields(
         cls,
-        li: "LinkInfo",
+        li: LinkInfo,
         payload: bytes,
         base: int,
         offs_local_volume: int,
@@ -117,7 +117,7 @@ class LinkInfo:
     @classmethod
     def _populate_remote_fields(
         cls,
-        li: "LinkInfo",
+        li: LinkInfo,
         payload: bytes,
         base: int,
         offs_network_vol: int,
@@ -132,7 +132,7 @@ class LinkInfo:
             li.base_name_unicode = cls._read_cuni_at(payload, base, offs_base_name_unicode)
 
     @classmethod
-    def read(cls, br: BinReader) -> "LinkInfo":
+    def read(cls, br: BinReader) -> LinkInfo:
         """Read LinkInfo; offsets are relative to start of the LinkInfo structure."""
         (
             size,

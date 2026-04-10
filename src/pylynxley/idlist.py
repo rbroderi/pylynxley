@@ -38,7 +38,7 @@ class RootEntry:
     guid_str: str  # "{GUID}"
 
     @classmethod
-    def from_bytes(cls, data: bytes) -> "RootEntry":
+    def from_bytes(cls, data: bytes) -> RootEntry:
         """Parse RootEntry (starts with 0x1F 0x50)."""
         if not data.startswith(IDLIST_ROOT_PREFIX):
             msg = "Not a RootEntry block."
@@ -57,7 +57,7 @@ class DriveEntry:
     drive: str  # e.g., "C:"
 
     @classmethod
-    def from_bytes(cls, data: bytes) -> "DriveEntry":
+    def from_bytes(cls, data: bytes) -> DriveEntry:
         r"""Parse a DriveEntry (0x2F + 'C' ':' '\' + padding)."""
         if not data.startswith(IDLIST_DRIVE_PREFIX) or len(data) < DRIVE_ENTRY_MIN_LEN:
             msg = "Not a DriveEntry block."
@@ -81,7 +81,7 @@ class PathSegmentEntry:
     full_name: str = ""
 
     @classmethod
-    def for_path(cls, path: str) -> "PathSegmentEntry":
+    def for_path(cls, path: str) -> PathSegmentEntry:
         r"""Create a PathSegmentEntry from a filesystem path.
         >>> e = PathSegmentEntry.for_path(r"C:\Windows")
         >>> isinstance(e, PathSegmentEntry)
