@@ -4,6 +4,8 @@ name: Tests
   push:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   tests:
     name: Test suite with coverage

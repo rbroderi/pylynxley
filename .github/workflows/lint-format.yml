@@ -4,6 +4,8 @@ name: Lint and Format
   push:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   lint-format:
     name: Lint and format checks

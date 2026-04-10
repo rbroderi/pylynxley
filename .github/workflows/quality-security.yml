@@ -4,6 +4,8 @@ name: Quality and Security
   push:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   quality-security:
     name: Quality and security checks

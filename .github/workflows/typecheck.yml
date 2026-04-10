@@ -4,6 +4,8 @@ name: Typecheck
   push:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   typecheck:
     name: Type analysis
