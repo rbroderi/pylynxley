@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from struct import unpack
+from typing import Self
 
 from .core import LINKINFO_HEADER_LEGACY
 from .core import LINKINFO_HEADER_UNICODE
@@ -132,7 +133,7 @@ class LinkInfo:
             li.base_name_unicode = cls._read_cuni_at(payload, base, offs_base_name_unicode)
 
     @classmethod
-    def read(cls, br: BinReader) -> LinkInfo:
+    def read(cls, br: BinReader) -> Self:
         """Read LinkInfo; offsets are relative to start of the LinkInfo structure."""
         (
             size,

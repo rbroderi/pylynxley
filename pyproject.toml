@@ -1,7 +1,7 @@
 [project]
 name = "pylynxley"
-version = "2026.04.10.02"
-description = "Add your description here"
+version = "2026.04.10.03"
+description = "Read, write, and create Windows .lnk shortcut files (local, UNC, and UWP)."
 readme = "README.md"
 license = "LGPL-3.0-or-later"
 authors = [{ name = "rbroderi", email = "richard.broderick@gmail.com" }]
@@ -18,8 +18,8 @@ dependencies = ["beartype>=0.22.9"]
 dev = ["pytest>=9.0.3", "pytest-cov>=7.1.0", "pytest-sugar>=1.1.1"]
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.11.6"]
+build-backend = "uv_build"
 
 [tool.basedpyright]
 venvPath = "."
@@ -46,7 +46,7 @@ target-version = "py314"
 force-single-line = true
 
 [tool.coverage.run]
-omit = ["src/fanic/main.py", "src/pylynxley/tests/*"]
+omit = ["src/pylynxley/tests/*"]
 
 [tool.ty.src]
 exclude = ["typings"]

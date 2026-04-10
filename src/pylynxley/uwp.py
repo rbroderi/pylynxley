@@ -8,6 +8,7 @@ from dataclasses import field
 from io import BytesIO
 from struct import pack
 from typing import Final
+from typing import Self
 
 from .core import APPS_FIXED_HEADER
 from .core import APPS_FIXED_HEADER_LEN
@@ -30,7 +31,7 @@ class UwpSubBlock:
     raw_payload: bytes | None = None
 
     @classmethod
-    def from_bytes(cls, br: BinReader) -> UwpSubBlock:
+    def from_bytes(cls, br: BinReader) -> Self:
         t = br.read_u8()
         # Capture the payload after type byte so unknown layouts can still round-trip.
         tail = br.buf.read()
@@ -74,7 +75,7 @@ class UwpMainBlock:
     raw_payload: bytes | None = None
 
     @classmethod
-    def from_bytes(cls, br: BinReader) -> UwpMainBlock:
+    def from_bytes(cls, br: BinReader) -> Self:
         raw_payload = br.buf.read()
         br = BinReader(BytesIO(raw_payload))
         # Validate magic header: expected b'\x31\x53\x50\x53' ("1SPS")
@@ -110,7 +111,7 @@ class UwpSegmentEntry:
     main_blocks: list[UwpMainBlock] = field(default_factory=list)
 
     @classmethod
-    def from_bytes(cls, data: bytes) -> UwpSegmentEntry:
+    def from_bytes(cls, data: bytes) -> Self:
         r"""Parse a UWP APPS segment with sanity checks on header and blocks region.
         Layout (minimum):
           - 2 bytes: unknown

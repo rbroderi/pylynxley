@@ -4,3 +4,4 @@ extends: default
 rules:
   new-lines: disable
   document-start: disable
+  line-length: disable
