@@ -1,6 +1,6 @@
 [project]
 name = "pylynxley"
-version = "2026.04.10.03"
+version = "2026.04.10.04"
 description = "Read, write, and create Windows .lnk shortcut files (local, UNC, and UWP)."
 readme = "README.md"
 license = "LGPL-3.0-or-later"
