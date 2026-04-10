@@ -1,3 +1,5 @@
+# ruff: noqa: E402
+
 from beartype.claw import beartype_this_package  # type: ignore[import-not-found]
 
 beartype_this_package()
@@ -11,7 +13,9 @@ from pylynxley.core import LnkUnsupportedError as LnkUnsupportedError
 from pylynxley.core import ShowCommand as ShowCommand
 from pylynxley.core import datetime_to_filetime as datetime_to_filetime
 from pylynxley.core import filetime_to_datetime as filetime_to_datetime
-from pylynxley.extradata import EnvironmentVariableDataBlock as EnvironmentVariableDataBlock
+from pylynxley.extradata import (
+    EnvironmentVariableDataBlock as EnvironmentVariableDataBlock,
+)
 from pylynxley.extradata import ExtraData as ExtraData
 from pylynxley.extradata import ExtraDataBlock as ExtraDataBlock
 from pylynxley.extradata import IconEnvironmentDataBlock as IconEnvironmentDataBlock
